@@ -11,26 +11,27 @@ const userSchema = new mongoose.Schema({
     maxlength: 255,
     unique: true,
     lowercase: true,
-    required: true
+    required: true,
   },
   password: {
     type: String,
     minlength: 8,
     maxlength: 1024,
-    required: true
+    required: true,
   },
   isAdmin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   role: {
     type: String,
-    default: "user"
+    default: "user",
+    enum: ["user", "admin", "customer", "seller"],
   },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -60,7 +61,7 @@ userSchema.methods.generateAuthToken = function () {
         isAdmin: this.isAdmin,
         role: this.role,
         iat: new Date().getTime(),
-        exp: new Date().setDate(new Date().getDate() + 1)
+        exp: new Date().setDate(new Date().getDate() + 1),
       },
       JWT_SECRET
     );
@@ -68,34 +69,19 @@ userSchema.methods.generateAuthToken = function () {
     throw new Error(err);
   }
 };
-const User = new mongoose.model("user", userSchema);
+
 const validateUser = {
   register: Joi.object().keys({
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(8)
-      .max(255)
-      .required(),
-    confirmPassword: Joi.string()
-      .min(8)
-      .max(255)
-      .required()
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(8).max(255).required(),
+    confirmPassword: Joi.string().min(8).max(255).required(),
   }),
   login: Joi.object().keys({
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(8)
-      .max(255)
-      .required()
-  })
-}
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(8).max(255).required(),
+  }),
+};
 exports.validateUser = validateUser;
+
+const User = new mongoose.model("user", userSchema);
 exports.User = User;

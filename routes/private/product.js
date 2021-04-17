@@ -3,24 +3,28 @@ const router = express.Router();
 const {
   createOrUpdateProduct,
   deleteProduct,
-  getProductByIdToEdit
+  getProductByIdToEdit,
 } = require("../../controllers/productController");
 const {
   validateBody,
   validateParamId,
-  schemas
+  schemas,
 } = require("../../middlewares/validator");
 const { validateProduct } = require("../../models/Product");
-const { auth, admin } = require("../../middlewares/authorization");
+const {
+  auth,
+  admin,
+  adminOrSeller,
+} = require("../../middlewares/authorization");
 
 router.post(
   "/",
-  [validateBody(validateProduct.product), auth, admin],
+  [validateBody(validateProduct.product), auth, adminOrSeller],
   createOrUpdateProduct
 );
 router.get(
   "/:id",
-  [validateParamId(schemas.id), auth, admin],
+  [validateParamId(schemas.id), auth, adminOrSeller],
   getProductByIdToEdit
 );
 router.delete(

@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { PORT } = require("./config/keys");
+// const { PORT } = require("./config/keys");
 const app = express();
 
 require("./startUp/db")();
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, (err) => {
   if (err) {
