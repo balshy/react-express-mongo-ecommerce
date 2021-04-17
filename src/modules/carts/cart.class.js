@@ -8,7 +8,7 @@ class Cart {
   addItemCart(product) {
     if (this.cart.length > 0) {
       const id = product._id;
-      const cartIndex = this.cart.findIndex(item => {
+      const cartIndex = this.cart.findIndex((item) => {
         return item.product._id == id;
       });
       if (cartIndex === -1) {
@@ -26,11 +26,11 @@ class Cart {
     this.totalAmount = totals(this.cart).amount;
   }
   updateItemCart(id, operator) {
-    const cart = this.cart.map(item =>
+    const cart = this.cart.map((item) =>
       item.product._id == id
         ? (item = {
             ...item,
-            quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
+            quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1,
           })
         : item
     );
@@ -40,7 +40,7 @@ class Cart {
   }
 
   removeItem(id, operator) {
-    const item = this.cart.filter(item => item.product._id == id);
+    const item = this.cart.filter((item) => item.product._id == id);
     if (item.length === 0) {
       return;
     }
@@ -53,7 +53,7 @@ class Cart {
     }
   }
   removeItemCart(id) {
-    this.cart = [...this.cart.filter(item => item.product._id != id)];
+    this.cart = [...this.cart.filter((item) => item.product._id != id)];
     this.totalAmount = totals(this.cart).amount;
     this.totalQuantity = totals(this.cart).qty;
   }
@@ -65,9 +65,9 @@ class Cart {
   }
 }
 
-const totals = cart => {
+const totals = (cart) => {
   const totalAmount = cart
-    .map(item => {
+    .map((item) => {
       return item.product.discount && item.product.discount > 0
         ? Number(
             item.product.price -
@@ -80,7 +80,7 @@ const totals = cart => {
     }, 0);
 
   const totalQuantity = cart
-    .map(item => {
+    .map((item) => {
       return item.quantity;
     })
     .reduce((a, b) => {
