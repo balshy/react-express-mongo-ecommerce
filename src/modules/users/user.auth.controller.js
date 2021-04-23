@@ -17,35 +17,28 @@ module.exports = {
 
     const newUser = new User({
       email,
-      password
+      password,
     });
 
     const user = await newUser.save();
 
     const token = `Bearer ${user.generateAuthToken()}`;
 
-    res
-      .header("authorization", token)
-      .status(200)
-      .json({ token });
+    res.header("authorization", token).status(200).json({ token });
   }),
   login: asyncMiddleware(async (req, res) => {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
-    if (!user)
-      return res.status(400).json(`"invalid" email or password.`);
+    if (!user) return res.status(400).json(`"invalid" email or password.`);
 
     const isValidPassword = await user.isValidPassword(password);
     if (!isValidPassword)
       return res.status(400).json(`"invalid" email or password.`);
 
     const token = `Bearer ${user.generateAuthToken()}`;
-    res
-      .header("authorization", token)
-      .status(200)
-      .json({ token });
+    res.header("authorization", token).status(200).json({ token });
   }),
   secret: async (req, res) => {
     res.status(200).json({ message: "secret page!!" });
-  }
+  },
 };

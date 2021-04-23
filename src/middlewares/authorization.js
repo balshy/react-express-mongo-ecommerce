@@ -4,6 +4,7 @@ const { JWT_SECRET } = require("../config/keys");
 module.exports = {
   auth: async (req, res, next) => {
     const bearerToken = req.header("authorization");
+
     if (!bearerToken)
       return res.status(401).send("Access denied. No token provided.");
 

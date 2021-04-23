@@ -66,7 +66,9 @@ const validateProduct = {
     isAvailable: Joi.boolean(),
   }),
 };
-const Product = new mongoose.model("product", productSchema);
+const Product = mongoose.model("product", productSchema);
 
-exports.Product = Product;
-exports.validateProduct = validateProduct;
+module.exports = {
+  Product,
+  validateProduct,
+};

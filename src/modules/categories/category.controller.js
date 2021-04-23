@@ -17,14 +17,13 @@ module.exports = {
     res.status(200).json(category);
   }),
   createOrUpdateCategory: asyncMiddleware(async (req, res) => {
-
     const { name, description, isAvailable } = req.body;
     const _id = req.body._id || undefined;
     let categoryFields = {};
 
     if (name) categoryFields.name = name;
     if (description) categoryFields.description = description;
-    categoryFields.isAvailable = (isAvailable !== undefined) ? isAvailable : true;
+    categoryFields.isAvailable = isAvailable !== undefined ? isAvailable : true;
 
     const category = await Category.findById(_id);
 
@@ -40,16 +39,15 @@ module.exports = {
     const newCategory = await new Category(categoryFields).save();
 
     res.json(newCategory);
-
   }),
   deleteCategory: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
     const category = await Category.findByIdAndRemove(_id);
     if (!category) {
-    errors.notFound = 'Category not found'
-      return res.status(400).json(errors)
+      errors.notFound = "Category not found";
+      return res.status(400).json(errors);
     }
     res.status(200).json({ success: true });
-  })
+  }),
 };
