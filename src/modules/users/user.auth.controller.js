@@ -41,4 +41,30 @@ module.exports = {
   secret: async (req, res) => {
     res.status(200).json({ message: "secret page!!" });
   },
+
+  list: async (req, res) => {
+    const users = await User.find({}).select("-password").lean();
+
+    res.status(200).json(users);
+  },
+
+  update: async (req, res) => {
+    const id = req.params.id;
+    const { isAdmin, role } = req.body;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: id },
+      { isAdmin, role },
+      { new: true }
+    );
+
+    res.status(200).json(updatedUser);
+  },
+  remove: async (req, res) => {
+    const id = req.params.id;
+
+    const deleteUser = await User.findByIdAndRemove(id);
+
+    res.status(200).json(deleteUser);
+  },
 };

@@ -9,12 +9,12 @@ const paymentRoute = require("../modules/payments/payment.routes");
 const orderRoute = require("../modules/orders/order.routes");
 
 module.exports = (app) => {
-  app.use("/api/auth", authRoute);
-  app.use("/api/category", categoryRoute);
-  app.use("/api/customer", customerRoute);
-  app.use("/api/product", productRoute);
+  app.use("/api/users", authRoute);
+  app.use("/api/categories", categoryRoute);
+  app.use("/api/customers", customerRoute);
+  app.use("/api/products", productRoute);
   app.use("/api/shopping-cart", cartRoute);
-  app.use("/api/payment", paymentRoute);
-  app.use("/api/order", orderRoute);
+  app.use("/api/payments", paymentRoute);
+  app.use("/api/orders", orderRoute);
   app.use(errorMiddleware);
 };

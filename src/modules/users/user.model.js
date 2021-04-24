@@ -80,8 +80,15 @@ const validateUser = {
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(8).max(255).required(),
   }),
+  edit: Joi.object().keys({
+    isAdmin: Joi.boolean(),
+    role: Joi.string().min(3).max(15),
+  }),
 };
-exports.validateUser = validateUser;
 
 const User = new mongoose.model("user", userSchema);
-exports.User = User;
+
+module.exports = {
+  User,
+  validateUser,
+};

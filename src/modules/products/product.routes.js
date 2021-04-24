@@ -17,7 +17,7 @@ const { validateProduct } = require("./product.model");
 
 router.get("/", getProducts);
 router.get("/:id", validateParamId(schemas.id), getProductById);
-router.get("/category/:category", getProductByCategory);
+router.get("/categories/:category", getProductByCategory);
 
 const {
   auth,
