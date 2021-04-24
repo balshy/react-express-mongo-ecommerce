@@ -33,6 +33,9 @@ const validateCategory = {
     isAvailable: Joi.boolean(),
   }),
 };
-exports.validateCategory = validateCategory;
-exports.categorySchema = categorySchema;
-exports.Category = Category;
+
+module.exports = {
+  validateCategory,
+  categorySchema,
+  Category,
+};

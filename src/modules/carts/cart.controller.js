@@ -1,7 +1,6 @@
-const { Cart } = require("../models/Cart");
-const { Product } = require("../models/Product");
-const asyncMiddleware = require("../middlewares/async");
-
+const { Cart } = require("../carts/cart.class");
+const { Product } = require("../products/product.model");
+const asyncMiddleware = require("../../middlewares/async");
 
 module.exports = {
   shoppingCart: asyncMiddleware(async (req, res) => {

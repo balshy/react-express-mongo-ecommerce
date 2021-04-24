@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Joi = require("joi");
-const { JWT_SECRET } = require("../config/keys");
+const { JWT_SECRET } = require("../../config/keys");
 
 const userSchema = new mongoose.Schema({
   email: {

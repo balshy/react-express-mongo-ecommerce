@@ -1,6 +1,5 @@
-const { Category } = require("../models/Category");
-const asyncMiddleware = require("../middlewares/async");
-const ObjectId = require("mongoose").Types.ObjectId;
+const { Category } = require("./category.model");
+const asyncMiddleware = require("../../middlewares/async");
 
 module.exports = {
   getCategories: asyncMiddleware(async (req, res) => {

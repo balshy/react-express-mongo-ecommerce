@@ -1,6 +1,6 @@
-const { Order } = require("../models/Order");
-const { Product } = require("../models/Product");
-const { Customer } = require("../models/Customer");
+const { Order } = require("../orders/order.model");
+const { Product } = require("../products/product.model");
+const { Customer } = require("../customers/customer.model");
 const request = require("request");
 const JWT = require("jsonwebtoken");
 
@@ -12,7 +12,7 @@ const {
   JWT_SECRET,
   RETURN_URL,
   CANCEL_URL,
-} = require("../config/keys");
+} = require("../../config/keys");
 
 const verifyUserAuth = async (bearerToken) => {
   if (!bearerToken) {

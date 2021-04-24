@@ -1,5 +1,5 @@
-const { User } = require("../models/User");
-const asyncMiddleware = require("../middlewares/async");
+const { User } = require("./user.model");
+const asyncMiddleware = require("../../middlewares/async");
 
 module.exports = {
   register: asyncMiddleware(async (req, res) => {

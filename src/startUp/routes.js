@@ -1,23 +1,20 @@
 const errorMiddleware = require("../middlewares/error");
-const auth = require("../routes/api/auth");
-const category = require("../routes/api/category");
-const customer = require("../routes/api/customer");
-const privateCategory = require("../routes/private/category");
-const privateProduct = require("../routes/private/product");
-const product = require("../routes/api/product");
-const shoppingCart = require("../routes/api/shoppingCart");
-const payment = require('../routes/api/payment');
-const order = require("../routes/api/order");
 
-module.exports = app => {
-  app.use("/api/auth", auth);
-  app.use("/api/category", category);
-  app.use("/admin/category", privateCategory);
-  app.use("/api/customer", customer);
-  app.use("/admin/product", privateProduct);
-  app.use("/api/product", product);
-  app.use("/api/shopping-cart", shoppingCart);
-  app.use("/api/payment", payment);
-  app.use("/api/order", order);
+const authRoute = require("../modules/users/user.routes");
+const categoryRoute = require("../modules/categories/category.routes");
+const customerRoute = require("../modules/customers/customer.routes");
+const productRoute = require("../modules/products/product.routes");
+const cartRoute = require("../modules/carts/cart.routes");
+const paymentRoute = require("../modules/payments/payment.routes");
+const orderRoute = require("../modules/orders/order.routes");
+
+module.exports = (app) => {
+  app.use("/api/auth", authRoute);
+  app.use("/api/category", categoryRoute);
+  app.use("/api/customer", customerRoute);
+  app.use("/api/product", productRoute);
+  app.use("/api/shopping-cart", cartRoute);
+  app.use("/api/payment", paymentRoute);
+  app.use("/api/order", orderRoute);
   app.use(errorMiddleware);
 };

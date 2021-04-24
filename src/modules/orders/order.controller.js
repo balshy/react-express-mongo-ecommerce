@@ -1,7 +1,6 @@
-const { Order } = require("../models/Order");
-const { Product } = require("../models/Product");
-const { Customer } = require("../models/Customer");
-const asyncMiddleware = require("../middlewares/async");
+const { Order } = require("../orders/order.model");
+const { Customer } = require("../customers/customer.model");
+const asyncMiddleware = require("../../middlewares/async");
 
 module.exports = {
   createOrder: asyncMiddleware(async (req, res) => {
