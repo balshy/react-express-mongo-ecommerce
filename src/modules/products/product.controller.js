@@ -44,7 +44,8 @@ module.exports = {
       );
       return res.status(200).json(updateProduct);
     }
-
+    productFields.seller = req.user._id;
+    console.log(productFields);
     const updateProduct = await new Product(productFields).save();
 
     res.status(200).json(updateProduct);

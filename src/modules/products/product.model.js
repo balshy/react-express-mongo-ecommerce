@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const { categorySchema } = require("../categories/category.model");
 const Joi = require("joi");
 
@@ -46,11 +47,11 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // seller: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "user",
-  //   required: true,
-  // },
+  seller: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
 });
 
 const validateProduct = {
