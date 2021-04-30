@@ -1,6 +1,21 @@
+const { JWT_SECRET_CART } = require("../../config/keys");
+
 const { Cart } = require("../carts/cart.class");
 const { Product } = require("../products/product.model");
 const asyncMiddleware = require("../../middlewares/async");
+const JWT = require("jsonwebtoken");
+
+const signTokenCart = (items) => {
+  const token = JWT.sign(
+    {
+      items,
+      iat: new Date().getTime(),
+      exp: new Date().setSeconds(3600),
+    },
+    JWT_SECRET_CART
+  );
+  if (token) return token;
+};
 
 module.exports = {
   shoppingCart: asyncMiddleware(async (req, res) => {
@@ -14,6 +29,7 @@ module.exports = {
     res.status(200).json(token);
   }),
   addItemCart: asyncMiddleware(async (req, res) => {
+    console.log("XXXX");
     const errors = {};
     const _id = req.value.params;
     const cart = new Cart(

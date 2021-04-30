@@ -21,7 +21,7 @@ module.exports = {
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : [];
 
     cart = new Cart(cart);
-    
+
     const product = await Product.findById(_id).select([
       "name",
       "category.name",

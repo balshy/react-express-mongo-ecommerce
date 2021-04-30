@@ -4,6 +4,7 @@ const asyncMiddleware = require("../../middlewares/async");
 
 module.exports = {
   createOrder: asyncMiddleware(async (req, res) => {
+    console.log("Order Controller ", req.cart);
     const errors = {};
     const cart = req.cart.items;
 
@@ -27,5 +28,18 @@ module.exports = {
 
     await order.save();
     res.status(200).json(order);
+  }),
+  list: asyncMiddleware(async (req, res) => {
+    const userId = req.user._id;
+
+    const orders = await Order.find({ customer: userId }).lean();
+
+    res.status(200).json(orders);
+  }),
+
+  adminList: asyncMiddleware(async (req, res) => {
+    const orders = await Order.find({}).lean();
+
+    res.status(200).json(orders);
   }),
 };

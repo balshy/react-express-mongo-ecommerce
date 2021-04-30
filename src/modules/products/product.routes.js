@@ -15,16 +15,17 @@ const {
 } = require("../../middlewares/validator");
 const { validateProduct } = require("./product.model");
 
-router.get("/", getProducts);
-router.get("/:id", validateParamId(schemas.id), getProductById);
-router.get("/categories/:category", getProductByCategory);
-
 const {
   auth,
   admin,
   adminOrSeller,
 } = require("../../middlewares/authorization");
 
+router.get("/", getProducts);
+router.get("/:id", validateParamId(schemas.id), getProductById);
+router.get("/categories/:category", getProductByCategory);
+
+// *********** admin ******
 router.post(
   "/",
   [validateBody(validateProduct.product), auth, adminOrSeller],
