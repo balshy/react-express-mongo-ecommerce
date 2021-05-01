@@ -3,8 +3,6 @@ const JWT = require("jsonwebtoken");
 
 module.exports = {
   tokenCartItems: async (req, res, next) => {
-    console.log(req.header);
-    console.log(req.body);
     // let token = req.header('cart-items');
     let { token } = req.body;
 

@@ -52,6 +52,7 @@ module.exports = {
     const id = req.params.id;
     const { isAdmin, role } = req.body;
 
+     
     const updatedUser = await User.findOneAndUpdate(
       { _id: id },
       { isAdmin, role },

@@ -23,3 +23,5 @@ app.listen(PORT, (err) => {
   }
   console.log(`Server connected on port ${PORT}`);
 });
+
+module.exports = app;

@@ -81,8 +81,8 @@ const validateUser = {
     password: Joi.string().min(8).max(255).required(),
   }),
   edit: Joi.object().keys({
-    isAdmin: Joi.boolean(),
-    role: Joi.string().min(3).max(15),
+    isAdmin: Joi.boolean().required(),
+    role: Joi.string().min(3).max(15).required(),
   }),
 };
 

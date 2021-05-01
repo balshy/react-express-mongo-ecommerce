@@ -21,13 +21,13 @@ const { auth, admin } = require("../../middlewares/authorization");
 router.get(
   "/",
   [
-    /* admin,*/
+    auth, admin
   ],
   list
 );
 
-router.put("/:id", [/* admin,*/ validateBody(validateUser.edit)], update);
-router.put("/:id", [/* admin,*/ validateParamId(schemas.id)], remove);
+router.put("/:id", [auth, admin, validateBody(validateUser.edit)], update);
+router.delete("/:id", [auth, admin, validateParamId(schemas.id)], remove);
 
 router.post("/register", validateBody(validateUser.register), register);
 router.post("/login", validateBody(validateUser.login), login);
